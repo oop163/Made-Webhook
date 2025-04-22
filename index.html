@@ -3,41 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة البرمجة</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
+    <title>صانع ويب هوك</title>
+    <style>
+    /*اذكر المصدر @Fa_r_es_1 , @FFAARRSS1 */
+        body {
+    text-align: center;
+    background-image: url('حط هنا رابط الصوره');
+    background-size: cover;}
+
+main {
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);}
+h1 {color: #333333;}
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+button {
+    width: 80%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;}
+button:hover {
+    background-color: #2980b9;}
+#error {
+    color: #FF0000;
+    margin-top: 10px;}
+    </style>
 </head>
 <body>
-    <header>
-        <h1>مرحباً بك في منصة البرمجة</h1>
-        <select id="languageSelector">
-            <option value="ar">العربية</option>
-            <option value="en">English</option>
-        </select>
-    </header>
-    
-    <main>
-        <section class="input-section">
-            <textarea id="codeInput" placeholder="اكتب الكود هنا..."></textarea>
-            <div class="button-container">
-                <button id="uploadButton">رفع ملف</button>
-                <button id="generateButton">إنشاء</button>
-                <button id="previewButton">معاينة</button>
-                <button id="screenshotButton">تحويل إلى صورة</button>
-            </div>
-        </section>
-        
-        <section class="output-section">
-            <h2>الكود الناتج</h2>
-            <pre id="codeOutput"></pre>
-        </section>
-    </main>
-    
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2023</p>
-    </footer>
-    
-    <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<main>
+    <h1>صانع ويب هوك</h1>
+
+    <div>
+        <input id="phone" placeholder="هنا التوكن">
+    </div>
+
+    <div>
+        <input id="M311U" placeholder="اكتب هنا رابط الملف">
+    </div>
+
+    <div>
+        <button onclick="openWebhookLink()">عمل ويب هوك</button>
+        <button onclick="deleteWebhook()">حذف ويب هوك</button>
+    <div>
+        <button onclick="getBotInfo()">جلب معلومات البوت</button>
+          <div id="result"></div>
+    </div>
+
+    <div id="error"></div>
+</main>
+
+<script>
+    function openWebhookLink() {
+        var token = document.getElementById("phone").value;
+        var url = "https://" + document.getElementById("M311U").value;
+        if (token.trim() === "" || url.trim() === "") {
+            document.getElementById("error").innerText = "يرجى ملء جميع الحقول";
+            return;}
+            
+        var webhookLink = "https://api.telegram.org/bot" + token + "/setwebhook?url=" + url;
+        document.getElementById("error").innerText = "";
+        window.open(webhookLink, '_blank');}
+    function deleteWebhook() {
+        var token = document.getElementById("phone").value;
+        if (token.trim() === "") {
+            document.getElementById("error").innerText = "يرجى إدخال التوكن";
+            return;}
+        var deleteWebhookLink = "https://api.telegram.org/bot" + token + "/deletewebhook";
+        document.getElementById("error").innerText = "";
+        window.open(deleteWebhookLink, '_blank');}
+    function getBotInfo() {
+        var token = document.getElementById("phone").value;
+        var botInfoLink = "https://api.telegram.org/bot" + token + "/getMe";
+        fetch(botInfoLink)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = "معلومات البوت: " +
+                    "<br>معرف البوت: @" + data.result.username +
+                    "<br>اسم البوت: " + data.result.first_name +
+                    "<br>رقم البوت: " + data.result.id;
+            })
+            
+            .catch(error => {
+                document.getElementById("result").innerText = "حدث خطأ أثناء جلب معلومات البوت.";
+            });}
+    function executeWebhook() {
+        var webhookUrl = document.getElementById("webhookUrl").value;
+        document.getElementById("error").innerText = "";}
+</script>
 </body>
 </html>
