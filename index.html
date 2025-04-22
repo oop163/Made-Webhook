@@ -3,123 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع مشابه</title>
+    <title>منصة البرمجة</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1 id="headerTitle">مرحباً بك في موقعنا</h1>
-        <p id="headerSubtitle">قم بإنشاء ومشاركة كودك الخاص هنا!</p>
+        <h1>مرحباً بك في منصة البرمجة</h1>
         <select id="languageSelector">
             <option value="ar">العربية</option>
             <option value="en">English</option>
         </select>
     </header>
+    
     <main>
         <section class="input-section">
-            <h2 id="inputTitle">أدخل الكود</h2>
-            <textarea id="codeInput" rows="10" placeholder="اكتب الكود هنا..."></textarea>
+            <textarea id="codeInput" placeholder="اكتب الكود هنا..."></textarea>
             <div class="button-container">
                 <button id="uploadButton">رفع ملف</button>
                 <button id="generateButton">إنشاء</button>
                 <button id="previewButton">معاينة</button>
-                <button id="downloadButton">تحميل الكود</button>
-                <button id="shareButton">مشاركة الكود</button>
-                <button id="explainButton">شرح الكود</button>
                 <button id="screenshotButton">تحويل إلى صورة</button>
-                <button id="createFileButton">إنشاء ملف</button>
             </div>
         </section>
+        
         <section class="output-section">
-            <h2 id="outputTitle">الكود الناتج</h2>
+            <h2>الكود الناتج</h2>
             <pre id="codeOutput"></pre>
         </section>
-        <section class="preview-section">
-            <h2 id="previewTitle">معاينة الكود</h2>
-            <iframe id="codePreview" sandbox="allow-scripts" title="معاينة الكود"></iframe>
-        </section>
     </main>
-
-    <!-- نافذة الشرح -->
-    <div id="explanationModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="explanationTitle">شرح الكود</h2>
-            <p id="codeExplanation"></p>
-            <div class="links">
-                <a href="https://t.me/+fZ9XwHiZ0Ik3MzRk" target="_blank">انضم إلى القناة</a>
-                <a href="https://t.me/r_3_j_f" target="_blank">تواصل مع المطور</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة تحويل الكود إلى صورة -->
-    <div id="screenshotModal" class="modal">
-        <div class="modal-content">
-            <span class="close-screenshot">&times;</span>
-            <h2>تحويل الكود إلى صورة</h2>
-            <p>اختر تنسيق الصورة:</p>
-            <select id="imageFormat">
-                <option value="png">PNG</option>
-                <option value="jpeg">JPEG</option>
-            </select>
-            <p>اختر الثيم:</p>
-            <select id="themeSelect">
-                <option value="flamingo">Flamingo</option>
-                <option value="horizon">Horizon</option>
-                <option value="coral">Coral</option>
-                <option value="peach">Peach</option>
-                <option value="gotham">Gotham</option>
-                <option value="ice">Ice</option>
-            </select>
-            <p>اختر اللغة:</p>
-            <select id="languageSelect">
-                <option value="c">C</option>
-                <option value="cpp">C++</option>
-                <option value="csharp">C#</option>
-                <option value="clojure">Clojure</option>
-                <option value="crystal">Crystal</option>
-                <option value="css">CSS</option>
-                <option value="html">HTML</option>
-                <option value="javascript">JavaScript</option>
-                <option value="jsx">JavaScript/JSX</option>
-                <option value="json">JSON</option>
-                <option value="kotlin">Kotlin</option>
-                <option value="php">PHP</option>
-                <option value="python">Python</option>
-                <option value="ruby">Ruby</option>
-                <option value="rust">Rust</option>
-                <option value="scala">Scala</option>
-                <option value="swift">Swift</option>
-                <option value="typescript">TypeScript</option>
-            </select>
-            <p>اختر حجم الخط:</p>
-            <input type="range" id="fontSize" min="10" max="30" value="15"> <span id="fontSizeValue">15px</span>
-            <button id="captureButton">التقاط الصورة</button>
-        </div>
-    </div>
-
-    <!-- نافذة إنشاء ملف -->
-    <div id="fileModal" class="modal">
-        <div class="modal-content">
-            <span class="close-file">&times;</span>
-            <h2>إنشاء ملف</h2>
-            <p>اختر صيغة الملف:</p>
-            <select id="fileFormat">
-                <option value="txt">Text File (.txt)</option>
-                <option value="py">Python File (.py)</option>
-                <option value="php">PHP File (.php)</option>
-                <option value="css">CSS File (.css)</option>
-                <option value="js">JavaScript File (.js)</option>
-            </select>
-            <button id="downloadFileButton">تنزيل الملف</button>
-            <button id="shareFileButton">مشاركة الملف</button>
-        </div>
-    </div>
-
+    
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2023</p>
     </footer>
+    
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </body>
