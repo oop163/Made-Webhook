@@ -1,83 +1,69 @@
-* {
-    box-sizing: border-box;
-}
+document.getElementById('uploadButton').addEventListener('click', function() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.txt,.py,.php,.css,.js';
+    input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('codeInput').value = event.target.result;
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+});
 
-body {
-    font-family: 'Red Hat Mono', monospace;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 20px;
-}
+// إنشاء الكود
+document.getElementById('generateButton').addEventListener('click', function() {
+    const code = document.getElementById('codeInput').value;
+    document.getElementById('codeOutput').textContent = code;
+});
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+// معاينة الكود
+document.getElementById('previewButton').addEventListener('click', function() {
+    const code = document.getElementById('codeInput').value;
+    const iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open();
+    doc.write(code);
+    doc.close();
+});
 
-h1 {
-    font-size: 2.5em;
-    color: #333;
-}
+// تحويل الكود إلى صورة
+document.getElementById('screenshotButton').addEventListener('click', function() {
+    const code = document.getElementById('codeInput').value;
+    const iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open();
+    doc.write(code);
+    doc.close();
 
-select {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    html2canvas(iframe).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'code.png';
+        link.click();
+        document.body.removeChild(iframe); // إزالة iframe بعد الاستخدام
+    });
+});
 
-textarea {
-    width: 100%;
-    height: 200px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-family: monospace;
-    resize: none;
-    margin-top: 10px;
-}
+// تغيير اللغة
+document.getElementById('languageSelector').addEventListener('change', function() {
+    const lang = this.value;
 
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-button {
-    background: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    flex: 1;
-    margin: 0 5px;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background: #0056b3;
-}
-
-.output-section {
-    background: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-pre {
-    background: #eee;
-    padding: 10px;
-    border-radius: 5px;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    color: #777;
-}
+    if (lang === 'en') {
+        document.getElementById('headerTitle').textContent = 'Welcome to the Programming Platform';
+        document.getElementById('codeInput').setAttribute('placeholder', 'Write your code here...');
+        document.getElementById('generateButton').textContent = 'Generate';
+        document.getElementById('previewButton').textContent = 'Preview';
+        document.getElementById('screenshotButton').textContent = 'Capture Image';
+    } else {
+        document.getElementById('headerTitle').textContent = 'مرحباً بك في منصة البرمجة';
+        document.getElementById('codeInput').setAttribute('placeholder', 'اكتب الكود هنا...');
+        document.getElementById('generateButton').textContent = 'إنشاء';
+        document.getElementById('previewButton').textContent = 'معاينة';
+        document.getElementById('screenshotButton').textContent = 'تحويل إلى صورة';
+    }
+});
